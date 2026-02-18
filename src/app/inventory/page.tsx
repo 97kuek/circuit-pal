@@ -68,7 +68,7 @@ export default function InventoryPage() {
             <div className="max-w-7xl mx-auto p-4 md:p-12">
                 <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-blue-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    DASHBOARD
+                    ダッシュボード
                 </Link>
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
@@ -78,7 +78,7 @@ export default function InventoryPage() {
                         </div>
                         <div>
                             <h1 className="text-3xl font-black tracking-tight text-zinc-900">
-                                MY <span className="text-zinc-400 font-mono text-xl font-normal">INVENTORY</span>
+                                部品在庫管理 <span className="text-zinc-400 font-mono text-xl font-normal">INVENTORY</span>
                             </h1>
                             <p className="text-xs text-zinc-400 font-mono mt-1">LOCAL STORAGE • PRIVATE • SECURE</p>
                         </div>
@@ -89,7 +89,7 @@ export default function InventoryPage() {
                         className="flex items-center justify-center px-6 py-3 bg-zinc-900 text-white rounded-xl hover:bg-zinc-800 transition-all font-bold shadow-lg hover:shadow-xl active:scale-95"
                     >
                         <Plus className="w-5 h-5 mr-2" />
-                        ADD COMPONENT
+                        部品を追加
                     </button>
                 </div>
 
@@ -101,7 +101,7 @@ export default function InventoryPage() {
                         </div>
                         <div>
                             <div className="text-2xl font-black text-zinc-900">{items.length}</div>
-                            <div className="text-xs text-zinc-500 font-bold uppercase">Total Items</div>
+                            <div className="text-xs text-zinc-500 font-bold uppercase">登録アイテム数</div>
                         </div>
                     </div>
 
@@ -113,7 +113,7 @@ export default function InventoryPage() {
                             <div className="text-2xl font-black text-zinc-900">
                                 {items.filter(i => i.quantity < 5).length}
                             </div>
-                            <div className="text-xs text-zinc-500 font-bold uppercase">Low Stock</div>
+                            <div className="text-xs text-zinc-500 font-bold uppercase">在庫僅少</div>
                         </div>
                     </div>
 
@@ -122,8 +122,8 @@ export default function InventoryPage() {
                             <Save className="w-6 h-6" />
                         </div>
                         <div>
-                            <div className="text-xs font-mono text-green-600 font-bold mb-1">● AUTO-SAVED</div>
-                            <div className="text-xs text-zinc-400">Data stored locally</div>
+                            <div className="text-xs font-mono text-green-600 font-bold mb-1">● 自動保存済み</div>
+                            <div className="text-xs text-zinc-400">ブラウザに保存されます</div>
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@ export default function InventoryPage() {
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
                         <input
                             type="text"
-                            placeholder="Search parts, values, notes..."
+                            placeholder="部品名、値、メモで検索..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full pl-10 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg outline-none focus:border-blue-500 transition-colors"
@@ -145,9 +145,9 @@ export default function InventoryPage() {
                         onChange={(e) => setCategoryFilter(e.target.value as any)}
                         className="px-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg outline-none focus:border-blue-500 text-sm font-bold text-zinc-700"
                     >
-                        <option value="all">ALL CATEGORIES</option>
+                        <option value="all">全てのカテゴリ</option>
                         {Object.entries(CATEGORY_LABELS).map(([key, label]) => (
-                            <option key={key} value={key}>{label.toUpperCase()}</option>
+                            <option key={key} value={key}>{label}</option>
                         ))}
                     </select>
                 </div>
@@ -155,23 +155,23 @@ export default function InventoryPage() {
                 {/* Inventory List */}
                 <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden min-h-[400px]">
                     {!isLoaded ? (
-                        <div className="p-12 text-center text-zinc-400">Loading inventory...</div>
+                        <div className="p-12 text-center text-zinc-400">読み込み中...</div>
                     ) : filteredItems.length === 0 ? (
                         <div className="p-12 text-center">
                             <Package className="w-16 h-16 text-zinc-200 mx-auto mb-4" />
-                            <h3 className="text-zinc-900 font-bold mb-2">No Items Found</h3>
-                            <p className="text-zinc-500 text-sm">Add your first component to get started.</p>
+                            <h3 className="text-zinc-900 font-bold mb-2">アイテムが見つかりません</h3>
+                            <p className="text-zinc-500 text-sm">新しい部品を追加して管理を始めましょう。</p>
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
                                 <thead className="bg-zinc-50 border-b border-zinc-200">
                                     <tr>
-                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">Name / Value</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">Category</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">Location</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase text-center">Qty</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase text-right">Actions</th>
+                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">部品名 / 値</th>
+                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">カテゴリ</th>
+                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">保管場所</th>
+                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase text-center">数量</th>
+                                        <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase text-right">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-zinc-100">
@@ -227,7 +227,7 @@ export default function InventoryPage() {
                         <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
                             <div className="p-6 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/50">
                                 <h3 className="font-bold text-lg text-zinc-900">
-                                    {editingItem ? 'Edit Component' : 'Add Component'}
+                                    {editingItem ? '部品を編集' : '部品を追加'}
                                 </h3>
                                 <button onClick={() => setIsModalOpen(false)} className="text-zinc-400 hover:text-zinc-600">
                                     <X className="w-6 h-6" />
@@ -237,28 +237,28 @@ export default function InventoryPage() {
                             <form onSubmit={handleSubmit} className="p-6 space-y-4">
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="col-span-2">
-                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Item Name</label>
+                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">部品名</label>
                                         <input
                                             required
                                             className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl outline-none focus:border-blue-500 transition-all font-bold"
-                                            placeholder="e.g. Ceramic Capacitor"
+                                            placeholder="例: セラミックコンデンサ"
                                             value={formData.name}
                                             onChange={e => setFormData({ ...formData, name: e.target.value })}
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Value / Spec</label>
+                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">値 / 規格</label>
                                         <input
                                             className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl outline-none focus:border-blue-500 font-mono"
-                                            placeholder="e.g. 100nF"
+                                            placeholder="例: 100nF"
                                             value={formData.value}
                                             onChange={e => setFormData({ ...formData, value: e.target.value })}
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Quantity</label>
+                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">数量</label>
                                         <input
                                             type="number"
                                             required
@@ -270,7 +270,7 @@ export default function InventoryPage() {
                                     </div>
 
                                     <div className="col-span-2">
-                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Category</label>
+                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">カテゴリ</label>
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                                             {Object.entries(CATEGORY_LABELS).map(([key, label]) => (
                                                 <button
@@ -278,8 +278,8 @@ export default function InventoryPage() {
                                                     key={key}
                                                     onClick={() => setFormData({ ...formData, category: key as any })}
                                                     className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all ${formData.category === key
-                                                            ? "bg-zinc-800 text-white border-zinc-800"
-                                                            : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-300"
+                                                        ? "bg-zinc-800 text-white border-zinc-800"
+                                                        : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-300"
                                                         }`}
                                                 >
                                                     {label}
@@ -289,10 +289,10 @@ export default function InventoryPage() {
                                     </div>
 
                                     <div className="col-span-2">
-                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Location</label>
+                                        <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">保管場所</label>
                                         <input
                                             className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl outline-none focus:border-blue-500"
-                                            placeholder="e.g. Cabinet A, Drawer 3"
+                                            placeholder="例: パーツボックス A-3"
                                             value={formData.location}
                                             onChange={e => setFormData({ ...formData, location: e.target.value })}
                                         />
@@ -303,7 +303,7 @@ export default function InventoryPage() {
                                     type="submit"
                                     className="w-full py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-[0.98] transition-all mt-4"
                                 >
-                                    {editingItem ? 'UPDATE COMPONENT' : 'ADD TO STOCK'}
+                                    {editingItem ? '更新する' : '追加する'}
                                 </button>
                             </form>
                         </div>

@@ -71,16 +71,22 @@ export default function OhmsLawPage() {
     return (
         <div className="min-h-screen bg-zinc-50 p-6 md:p-12 font-sans text-zinc-900">
             <div className="max-w-4xl mx-auto space-y-8">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-zinc-900 transition-colors">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    ダッシュボードに戻る
+                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-amber-600 mb-8 transition-colors font-mono text-sm group">
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    ダッシュボード
                 </Link>
 
                 <div className="flex justify-between items-center">
-                    <h1 className="text-3xl font-bold flex items-center">
-                        <Zap className="w-8 h-8 mr-3 text-amber-500" />
-                        オームの法則 計算機
-                    </h1>
+                    <div className="flex items-center gap-4">
+                        <div className="p-3 bg-amber-500 rounded-xl text-white shadow-lg shadow-amber-200">
+                            <Zap className="w-6 h-6" />
+                        </div>
+                        <div>
+                            <h1 className="text-3xl font-black tracking-tight text-zinc-900">
+                                オームの法則 <span className="text-zinc-400 font-mono text-xl font-normal">OHM'S LAW</span>
+                            </h1>
+                        </div>
+                    </div>
                     <button
                         onClick={handleClear}
                         className="flex items-center px-4 py-2 text-sm text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"

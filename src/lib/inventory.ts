@@ -62,11 +62,11 @@ export function useInventory() {
 }
 
 export const CATEGORY_LABELS: Record<InventoryCategory, string> = {
-    resistors: "Resistors",
-    capacitors: "Capacitors",
-    leds: "LEDs",
-    ics: "ICs / Chips",
-    sensors: "Sensors",
-    boards: "Boards",
-    misc: "Misc / Other"
+    resistors: "抵抗器",
+    capacitors: "コンデンサ",
+    leds: "LED",
+    ics: "IC / チップ",
+    sensors: "センサー",
+    boards: "基板 / モジュール",
+    misc: "その他"
 };

@@ -164,3 +164,11 @@ export function calculateLedResistor(
 
     return { r, p, nearest };
 }
+
+export function formatCapacitance(farads: number): string {
+    if (farads >= 1e-3) return `${(farads * 1e3).toFixed(2)}mF`;
+    if (farads >= 1e-6) return `${(farads * 1e6).toFixed(2)}µF`;
+    if (farads >= 1e-9) return `${(farads * 1e9).toFixed(2)}nF`;
+    if (farads >= 1e-12) return `${(farads * 1e12).toFixed(2)}pF`;
+    return `${farads.toExponential(2)}F`;
+}

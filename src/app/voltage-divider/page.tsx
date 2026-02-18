@@ -40,9 +40,9 @@ export default function VoltageDividerPage() {
     return (
         <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-blue-100">
             <div className="max-w-4xl mx-auto p-6 md:p-12">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-blue-600 mb-8 transition-colors font-mono text-sm group">
+                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-teal-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    DASHBOARD
+                    ダッシュボード
                 </Link>
 
                 <div className="flex items-center gap-4 mb-2">
@@ -50,7 +50,7 @@ export default function VoltageDividerPage() {
                         <Activity className="w-6 h-6" />
                     </div>
                     <h1 className="text-3xl font-black tracking-tight text-zinc-900">
-                        VOLTAGE <span className="text-zinc-400 font-mono text-xl font-normal">DIVIDER</span>
+                        分圧回路 <span className="text-zinc-400 font-mono text-xl font-normal">VOLTAGE DIVIDER</span>
                     </h1>
                 </div>
                 <p className="text-zinc-500 mb-8 ml-16 max-w-lg">
@@ -191,7 +191,7 @@ export default function VoltageDividerPage() {
                         <div className="bg-white p-8 rounded-2xl shadow-xl shadow-zinc-200 border border-zinc-100">
                             <h3 className="text-zinc-900 font-bold mb-4 flex items-center">
                                 <Activity className="w-5 h-5 mr-2 text-teal-500" />
-                                CALCULATION RESULT
+                                計算結果
                             </h3>
 
                             {mode === "vout" ? (
@@ -213,7 +213,7 @@ export default function VoltageDividerPage() {
 
                                     {nearestR && (
                                         <div className="mt-6 pt-6 border-t border-zinc-100">
-                                            <p className="text-xs font-bold text-zinc-400 uppercase mb-2">NEAREST E24 VALUE</p>
+                                            <p className="text-xs font-bold text-zinc-400 uppercase mb-2">E24系列 近似値</p>
                                             <div className="text-2xl font-bold text-zinc-800 font-mono">
                                                 {formatResistance(nearestR)}
                                             </div>

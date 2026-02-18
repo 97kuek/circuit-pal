@@ -1,0 +1,16 @@
+{
+    "name": "Circuit-Pal",
+    "short_name": "Circuit-Pal",
+    "description": "Essential Electronics Engineering Toolkit",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color":="#fafafa",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        }
+    ]
+}

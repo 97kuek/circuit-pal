@@ -1,65 +1,72 @@
 "use client";
 
 import Link from "next/link";
-import { Calculator, Zap, Lightbulb, Cpu, Battery, Box, Activity, Archive } from "lucide-react";
+import { Zap, Cpu, Search, Settings, Lightbulb, Box, Terminal, Ruler, Layers, CircuitBoard, Clock } from "lucide-react";
 
 export default function Home() {
   const tools = [
     {
-      name: "抵抗値計算 (Resistor)",
-      description: "カラーコード読取 & 逆引き検索",
-      href: "/resistor",
-      icon: Calculator,
-      color: "bg-blue-600",
+      name: "抵抗ツールキット (Resistors)",
+      description: "カラーコード / SMD / LED計算",
+      href: "/resistors",
+      icon: Zap,
+      color: "bg-purple-500",
+    },
+    {
+      name: "ピン配置 (Pinout)",
+      description: "Arduino / ESP32 ピンマップ",
+      href: "/pinout",
+      icon: Cpu,
+      color: "bg-teal-600",
+    },
+    {
+      name: "分圧回路 (Voltage Divider)",
+      description: "抵抗分圧の計算と設計",
+      href: "/voltage-divider",
+      icon: CircuitBoard,
+      color: "bg-indigo-500",
     },
     {
       name: "オームの法則 (Ohm's Law)",
       description: "電圧・電流・抵抗・電力の計算",
       href: "/ohms-law",
-      icon: Zap,
+      icon: Lightbulb,
       color: "bg-amber-500",
     },
     {
-      name: "LED抵抗計算 (LED)",
-      description: "LEDに必要な抵抗値を算出",
-      href: "/led",
-      icon: Lightbulb,
-      color: "bg-rose-500",
-    },
-    {
-      name: "ピン配置図 (Pin-Pal)",
-      description: "Arduino / ESP32 ピンアサイン",
-      href: "/pinout",
-      icon: Cpu,
-      color: "bg-purple-600",
-    },
-    {
-      name: "バッテリー寿命計算",
-      description: "プロジェクトの稼働時間を予測",
-      href: "/battery",
-      icon: Battery,
-      color: "bg-emerald-500",
-    },
-    {
       name: "コンデンサ容量 (Capacitor)",
-      description: "コード(104)を容量に変換",
+      description: "コード読み取り / 容量変換",
       href: "/capacitor",
-      icon: Box, // Needs import
+      icon: Box,
       color: "bg-indigo-600",
     },
     {
-      name: "分圧回路 (Voltage Divider)",
-      description: "Vout / 抵抗値を計算",
-      href: "/voltage-divider",
-      icon: Activity, // Needs import
-      color: "bg-teal-600",
+      name: "555タイマー (555 Timer)",
+      description: "発振周波数 / パルス幅計算",
+      href: "/555-timer",
+      icon: Clock, // We need to import Clock
+      color: "bg-zinc-700",
+    },
+    {
+      name: "Webシリアルモニタ (Serial)",
+      description: "ブラウザから直接デバイス通信",
+      href: "/serial",
+      icon: Terminal,
+      color: "bg-blue-600",
+    },
+    {
+      name: "パターン幅計算 (Trace Width)",
+      description: "IPC-2221準拠の基板設計",
+      href: "/trace-width",
+      icon: Ruler,
+      color: "bg-orange-600",
     },
     {
       name: "在庫管理 (Inventory)",
-      description: "部品の在庫をローカルで管理",
+      description: "パーツの在庫をローカル管理",
       href: "/inventory",
-      icon: Archive, // Needs import
-      color: "bg-orange-500",
+      icon: Box,
+      color: "bg-zinc-600",
     },
   ];
 

@@ -24,9 +24,9 @@ export default function CapacitorPage() {
     return (
         <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-blue-100">
             <div className="max-w-3xl mx-auto p-6 md:p-12">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-blue-600 mb-8 transition-colors font-mono text-sm group">
+                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-indigo-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    DASHBOARD
+                    ダッシュボード
                 </Link>
 
                 <div className="flex items-center gap-4 mb-2">
@@ -34,7 +34,7 @@ export default function CapacitorPage() {
                         <Box className="w-6 h-6" />
                     </div>
                     <h1 className="text-3xl font-black tracking-tight text-zinc-900">
-                        CAPACITOR <span className="text-zinc-400 font-mono text-xl font-normal">DECODER</span>
+                        コンデンサ容量 <span className="text-zinc-400 font-mono text-xl font-normal">CAPACITOR</span>
                     </h1>
                 </div>
                 <p className="text-zinc-500 mb-12 ml-16 max-w-lg">
@@ -50,7 +50,7 @@ export default function CapacitorPage() {
                         </div>
 
                         <label className="block text-xs font-bold text-zinc-400 font-mono uppercase tracking-wider mb-3">
-                            CAPACITOR CODE
+                            コードを入力 (例: 104)
                         </label>
 
                         <div className="relative">
@@ -66,7 +66,7 @@ export default function CapacitorPage() {
 
                         <div className="mt-6 text-center">
                             <p className="text-xs text-zinc-400 font-medium">
-                                Enter the 3 digits printed on the capacitor body.
+                                本体に記載されている3桁の数値を入力
                             </p>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ export default function CapacitorPage() {
 
                         {/* Result Display */}
                         <div className={`text-center transition-all duration-500 ${result ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-                            <p className="text-xs font-bold text-zinc-400 font-mono uppercase tracking-wider mb-2">CALCULATED VALUE</p>
+                            <p className="text-xs font-bold text-zinc-400 font-mono uppercase tracking-wider mb-2">計算結果</p>
                             <div className="bg-zinc-900 text-white p-6 rounded-2xl shadow-xl shadow-indigo-500/20 relative overflow-hidden group">
                                 <div className="absolute inset-0 bg-indigo-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
                                 <h2 className="text-3xl md:text-4xl font-mono font-bold text-white">
@@ -108,7 +108,7 @@ export default function CapacitorPage() {
                 <div className="mt-16 pt-8 border-t border-zinc-200">
                     <h3 className="text-sm font-bold text-zinc-900 mb-6 font-mono uppercase flex items-center">
                         <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
-                        QUICK REFERENCE
+                        早見表
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
