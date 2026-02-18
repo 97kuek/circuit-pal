@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === 'production';
+const repoName = 'circuit-pal'; // Replace with your repo name if different
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: isProd ? `/${repoName}` : "",
+  images: {
+    unoptimized: true,
+  },
   reactCompiler: true,
 };
 
