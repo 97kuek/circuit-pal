@@ -22,7 +22,7 @@ export default function LEDCalculatorTab() {
         <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
 
             {/* Inputs */}
-            <div className="space-y-6 bg-white p-6 rounded-2xl border border-zinc-200">
+            <div className="space-y-6 bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700">
                 <h3 className="text-xs font-bold text-zinc-400 uppercase mb-4">パラメータ設定</h3>
 
                 <div>
@@ -32,7 +32,7 @@ export default function LEDCalculatorTab() {
                             type="number"
                             value={sourceVoltage}
                             onChange={(e) => setSourceVoltage(Number(e.target.value))}
-                            className="w-full p-2 bg-zinc-50 border border-zinc-200 rounded font-bold"
+                            className="w-full p-2 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded font-bold dark:text-white"
                         />
                         <span className="p-2 text-zinc-400 text-sm font-bold flex items-center">V</span>
                     </div>
@@ -60,7 +60,7 @@ export default function LEDCalculatorTab() {
                             value={ledVoltage}
                             onChange={(e) => setLedVoltage(Number(e.target.value))}
                             step="0.1"
-                            className="w-full p-2 bg-zinc-50 border border-zinc-200 rounded font-bold"
+                            className="w-full p-2 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded font-bold dark:text-white"
                         />
                     </div>
                     <div>
@@ -69,7 +69,7 @@ export default function LEDCalculatorTab() {
                             type="number"
                             value={ledCurrent}
                             onChange={(e) => setLedCurrent(Number(e.target.value))}
-                            className="w-full p-2 bg-zinc-50 border border-zinc-200 rounded font-bold"
+                            className="w-full p-2 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded font-bold dark:text-white"
                         />
                     </div>
                 </div>

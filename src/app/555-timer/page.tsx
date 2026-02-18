@@ -48,9 +48,9 @@ export default function Timer555Page() {
     }, [mode, r1, r2, c, monoR, monoC, cUnit]);
 
     return (
-        <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-orange-100">
+        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 bg-grid-pattern font-sans text-zinc-900 dark:text-zinc-100 selection:bg-orange-100">
             <div className="max-w-6xl mx-auto p-4 md:p-12">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-orange-600 mb-8 transition-colors font-mono text-sm group">
+                <Link href="/" className="inline-flex items-center text-zinc-500 dark:text-zinc-400 hover:text-orange-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     ダッシュボード
                 </Link>
@@ -61,14 +61,14 @@ export default function Timer555Page() {
                             <Clock className="w-6 h-6" />
                         </div>
                         <div>
-                            <h1 className="text-3xl font-black tracking-tight text-zinc-900">
+                            <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
                                 555タイマー <span className="text-zinc-400 font-mono text-xl font-normal">CALCULATOR</span>
                             </h1>
                             <p className="text-xs text-zinc-400 font-mono mt-1">ASTABLE & MONOSTABLE CIRCUITS</p>
                         </div>
                     </div>
 
-                    <div className="bg-zinc-200 p-1 rounded-lg inline-flex">
+                    <div className="bg-zinc-200 dark:bg-zinc-800 p-1 rounded-lg inline-flex">
                         <button
                             onClick={() => setMode("astable")}
                             className={`px-4 py-2 rounded-md text-sm font-bold transition-all ${mode === "astable" ? "bg-white shadow-sm text-zinc-900" : "text-zinc-500 hover:text-zinc-700"}`}
@@ -86,7 +86,7 @@ export default function Timer555Page() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Input & Visual Panel */}
-                    <div className="bg-white p-8 rounded-3xl border border-zinc-200 shadow-sm space-y-8">
+                    <div className="bg-white dark:bg-zinc-900 p-8 rounded-3xl border border-zinc-200 dark:border-zinc-700 shadow-sm space-y-8">
                         <div>
                             <h2 className="text-xs font-bold text-zinc-400 uppercase tracking-widest border-b border-zinc-100 pb-2 mb-6">回路パラメータ</h2>
 
@@ -99,7 +99,7 @@ export default function Timer555Page() {
                                             type="number"
                                             value={r1}
                                             onChange={(e) => setR1(e.target.value)}
-                                            className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
+                                            className="w-full p-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
                                         />
                                     </div>
                                     {/* R2 */}
@@ -109,7 +109,7 @@ export default function Timer555Page() {
                                             type="number"
                                             value={r2}
                                             onChange={(e) => setR2(e.target.value)}
-                                            className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
+                                            className="w-full p-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
                                         />
                                     </div>
                                     {/* C */}
@@ -119,7 +119,7 @@ export default function Timer555Page() {
                                             type="number"
                                             value={c}
                                             onChange={(e) => setC(e.target.value)}
-                                            className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
+                                            className="w-full p-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
                                         />
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@ export default function Timer555Page() {
                                             type="number"
                                             value={monoR}
                                             onChange={(e) => setMonoR(e.target.value)}
-                                            className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
+                                            className="w-full p-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
                                         />
                                     </div>
                                     {/* C */}
@@ -142,7 +142,7 @@ export default function Timer555Page() {
                                             type="number"
                                             value={monoC}
                                             onChange={(e) => setMonoC(e.target.value)}
-                                            className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
+                                            className="w-full p-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl font-mono outline-none focus:ring-2 focus:ring-zinc-500 transition-all text-lg"
                                         />
                                     </div>
                                 </div>

@@ -23,9 +23,9 @@ export default function CapacitorPage() {
     };
 
     return (
-        <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-blue-100">
+        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 bg-grid-pattern font-sans text-zinc-900 dark:text-zinc-100 selection:bg-blue-100">
             <div className="max-w-3xl mx-auto p-6 md:p-12">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-indigo-600 mb-8 transition-colors font-mono text-sm group">
+                <Link href="/" className="inline-flex items-center text-zinc-500 dark:text-zinc-400 hover:text-indigo-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     ダッシュボード
                 </Link>
@@ -34,7 +34,7 @@ export default function CapacitorPage() {
                     <div className="p-3 bg-indigo-600 rounded-xl text-white shadow-lg shadow-indigo-200">
                         <Box className="w-6 h-6" />
                     </div>
-                    <h1 className="text-3xl font-black tracking-tight text-zinc-900">
+                    <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
                         コンデンサ容量 <span className="text-zinc-400 font-mono text-xl font-normal">CAPACITOR</span>
                     </h1>
                 </div>
@@ -45,7 +45,7 @@ export default function CapacitorPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 
                     {/* Input Section */}
-                    <div className="bg-white p-8 rounded-2xl border border-zinc-200 shadow-sm relative overflow-hidden">
+                    <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-sm relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-4 opacity-5">
                             <Box className="w-32 h-32" />
                         </div>
@@ -59,7 +59,7 @@ export default function CapacitorPage() {
                                 type="text"
                                 value={code}
                                 onChange={(e) => handleInput(e.target.value)}
-                                className="w-full bg-zinc-50 border-2 border-zinc-200 focus:border-indigo-500 rounded-xl px-6 py-6 text-5xl font-black text-center tracking-widest outline-none transition-all font-mono text-zinc-800"
+                                className="w-full bg-zinc-50 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 focus:border-indigo-500 rounded-xl px-6 py-6 text-5xl font-black text-center tracking-widest outline-none transition-all font-mono text-zinc-800 dark:text-white"
                                 placeholder="104"
                                 maxLength={3}
                             />
@@ -121,8 +121,8 @@ export default function CapacitorPage() {
                 </div>
 
                 {/* Cheat Sheet */}
-                <div className="mt-16 pt-8 border-t border-zinc-200">
-                    <h3 className="text-sm font-bold text-zinc-900 mb-6 font-mono uppercase flex items-center">
+                <div className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white mb-6 font-mono uppercase flex items-center">
                         <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
                         早見表
                     </h3>
@@ -136,7 +136,7 @@ export default function CapacitorPage() {
                             <button
                                 key={item.c}
                                 onClick={() => handleInput(item.c)}
-                                className="p-3 rounded-lg border border-zinc-100 bg-white hover:border-indigo-200 hover:bg-indigo-50 transition-colors text-center"
+                                className="p-3 rounded-lg border border-zinc-100 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-indigo-200 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors text-center"
                             >
                                 <div className="font-mono font-bold text-zinc-900">{item.c}</div>
                                 <div className="text-xs text-zinc-500">{item.v}</div>

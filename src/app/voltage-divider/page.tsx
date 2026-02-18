@@ -39,9 +39,9 @@ export default function VoltageDividerPage() {
     }, [vin, r1, r2, vout, mode]);
 
     return (
-        <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-blue-100">
+        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 bg-grid-pattern font-sans text-zinc-900 dark:text-zinc-100 selection:bg-blue-100">
             <div className="max-w-4xl mx-auto p-6 md:p-12">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-teal-600 mb-8 transition-colors font-mono text-sm group">
+                <Link href="/" className="inline-flex items-center text-zinc-500 dark:text-zinc-400 hover:text-teal-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     ダッシュボード
                 </Link>
@@ -50,7 +50,7 @@ export default function VoltageDividerPage() {
                     <div className="p-3 bg-teal-600 rounded-xl text-white shadow-lg shadow-teal-200">
                         <Activity className="w-6 h-6" />
                     </div>
-                    <h1 className="text-3xl font-black tracking-tight text-zinc-900">
+                    <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
                         分圧回路 <span className="text-zinc-400 font-mono text-xl font-normal">VOLTAGE DIVIDER</span>
                     </h1>
                 </div>
@@ -60,7 +60,7 @@ export default function VoltageDividerPage() {
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center mb-8">
-                    <div className="bg-zinc-200 p-1 rounded-lg inline-flex">
+                    <div className="bg-zinc-200 dark:bg-zinc-800 p-1 rounded-lg inline-flex">
                         <button
                             onClick={() => setMode("vout")}
                             className={`px-4 py-2 rounded-md text-sm font-bold transition-all ${mode === "vout" ? "bg-white shadow-sm text-zinc-900" : "text-zinc-500 hover:text-zinc-700"}`}
@@ -79,7 +79,7 @@ export default function VoltageDividerPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                     {/* Visual Circuit Diagram with Inputs */}
-                    <div className="bg-white p-4 rounded-3xl border border-zinc-200 shadow-sm relative flex justify-center items-center select-none overflow-hidden min-h-[400px]">
+                    <div className="bg-white dark:bg-zinc-900 p-4 rounded-3xl border border-zinc-200 dark:border-zinc-700 shadow-sm relative flex justify-center items-center select-none overflow-hidden min-h-[400px]">
                         <div className="absolute top-4 left-4 text-xs font-mono text-zinc-300 font-bold">SCHEMATIC.001</div>
 
                         {/* 
@@ -189,7 +189,7 @@ export default function VoltageDividerPage() {
                     </div>
                     {/* Results & Info Panel */}
                     <div className="space-y-6">
-                        <div className="bg-white p-8 rounded-2xl shadow-xl shadow-zinc-200 border border-zinc-100">
+                        <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-xl shadow-zinc-200 dark:shadow-zinc-900 border border-zinc-100 dark:border-zinc-800">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-zinc-900 dark:text-zinc-100 font-bold flex items-center">
                                     <Activity className="w-5 h-5 mr-2 text-teal-500" />

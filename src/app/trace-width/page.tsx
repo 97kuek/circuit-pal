@@ -19,9 +19,9 @@ export default function TraceWidthPage() {
     }, [current, thickness, tempRise, layer]);
 
     return (
-        <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-orange-100">
+        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 bg-grid-pattern font-sans text-zinc-900 dark:text-zinc-100 selection:bg-orange-100">
             <div className="max-w-7xl mx-auto p-4 md:p-12">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-orange-600 mb-8 transition-colors font-mono text-sm group">
+                <Link href="/" className="inline-flex items-center text-zinc-500 dark:text-zinc-400 hover:text-orange-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     ダッシュボード
                 </Link>
@@ -33,7 +33,7 @@ export default function TraceWidthPage() {
                             <Ruler className="w-6 h-6" />
                         </div>
                         <div>
-                            <h1 className="text-3xl font-black tracking-tight text-zinc-900">
+                            <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
                                 パターン幅計算 <span className="text-zinc-400 font-mono text-xl font-normal">TRACE WIDTH</span>
                             </h1>
                             <p className="text-xs text-zinc-400 font-mono mt-1">IPC-2221 準拠 プリント基板設計ツール</p>
@@ -44,7 +44,7 @@ export default function TraceWidthPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     {/* Inputs Panel */}
-                    <div className="bg-white p-8 rounded-3xl border border-zinc-200 shadow-sm space-y-6">
+                    <div className="bg-white dark:bg-zinc-900 p-8 rounded-3xl border border-zinc-200 dark:border-zinc-700 shadow-sm space-y-6">
                         <h2 className="text-xs font-bold text-zinc-400 uppercase tracking-widest border-b border-zinc-100 pb-2">パラメータ設定</h2>
 
                         <div className="space-y-4">
@@ -71,7 +71,7 @@ export default function TraceWidthPage() {
                                             value={thickness}
                                             onChange={(e) => setThickness(Number(e.target.value))}
                                             step="0.5"
-                                            className="w-full pl-10 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
+                                            className="w-full pl-10 pr-4 py-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
                                         />
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@ export default function TraceWidthPage() {
                                             type="number"
                                             value={tempRise}
                                             onChange={(e) => setTempRise(Number(e.target.value))}
-                                            className="w-full pl-10 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
+                                            className="w-full pl-10 pr-4 py-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
                                         />
                                     </div>
                                 </div>
@@ -155,15 +155,15 @@ export default function TraceWidthPage() {
 
                         {/* Sub Results */}
                         <div className="grid grid-cols-2 gap-4 flex-1">
-                            <div className="bg-white p-6 rounded-2xl border border-zinc-200 flex flex-col justify-center items-center text-center">
+                            <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700 flex flex-col justify-center items-center text-center">
                                 <div className="text-zinc-400 text-[10px] font-bold uppercase mb-1">許容電流密度</div>
-                                <div className="text-xl font-bold text-zinc-900 font-mono">
+                                <div className="text-xl font-bold text-zinc-900 dark:text-white font-mono">
                                     {result ? (current / (result.areaSqMils * 0.00064516)).toFixed(1) : "--"} <span className="text-xs text-zinc-400">A/mm²</span>
                                 </div>
                             </div>
-                            <div className="bg-white p-6 rounded-2xl border border-zinc-200 flex flex-col justify-center items-center text-center">
+                            <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700 flex flex-col justify-center items-center text-center">
                                 <div className="text-zinc-400 text-[10px] font-bold uppercase mb-1">断面積</div>
-                                <div className="text-xl font-bold text-zinc-900 font-mono">
+                                <div className="text-xl font-bold text-zinc-900 dark:text-white font-mono">
                                     {result ? result.areaSqMils.toFixed(1) : "--"} <span className="text-xs text-zinc-400">mils²</span>
                                 </div>
                             </div>

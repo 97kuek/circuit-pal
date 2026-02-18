@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Archive, Plus, Search, Trash2, Edit2, Package, Save, X, AlertCircle, Download, Upload } from "lucide-react";
+import { ArrowLeft, Archive, Plus, Search, Trash2, Edit2, Package, Save, X, AlertCircle, Download, Upload, Minus } from "lucide-react";
 import { useState, useRef } from "react";
 import { useInventory, InventoryItem, InventoryCategory, CATEGORY_LABELS } from "@/lib/inventory";
 
@@ -13,6 +13,7 @@ export default function InventoryPage() {
     const [editingItem, setEditingItem] = useState<InventoryItem | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [categoryFilter, setCategoryFilter] = useState<InventoryCategory | "all">("all");
+    const [deleteTarget, setDeleteTarget] = useState<InventoryItem | null>(null);
 
     // Form State
     const [formData, setFormData] = useState<Partial<InventoryItem>>({
@@ -23,8 +24,6 @@ export default function InventoryPage() {
         location: "",
         notes: ""
     });
-
-    const uniqueCategories = Array.from(new Set(items.map(i => i.category)));
 
     const filteredItems = items.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -65,9 +64,9 @@ export default function InventoryPage() {
     };
 
     return (
-        <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-blue-100">
+        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 bg-grid-pattern font-sans text-zinc-900 dark:text-zinc-100 selection:bg-blue-100">
             <div className="max-w-7xl mx-auto p-4 md:p-12">
-                <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-blue-600 mb-8 transition-colors font-mono text-sm group">
+                <Link href="/" className="inline-flex items-center text-zinc-500 dark:text-zinc-400 hover:text-blue-600 mb-8 transition-colors font-mono text-sm group">
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     ダッシュボード
                 </Link>
@@ -78,7 +77,7 @@ export default function InventoryPage() {
                             <Archive className="w-6 h-6" />
                         </div>
                         <div>
-                            <h1 className="text-3xl font-black tracking-tight text-zinc-900">
+                            <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
                                 部品在庫管理 <span className="text-zinc-400 font-mono text-xl font-normal">INVENTORY</span>
                             </h1>
                             <p className="text-xs text-zinc-400 font-mono mt-1">ローカル保存 • 非公開 • 安全</p>
@@ -106,7 +105,7 @@ export default function InventoryPage() {
                         />
                         <button
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center px-4 py-3 bg-white text-zinc-600 border border-zinc-200 rounded-xl hover:bg-zinc-50 transition-all font-bold text-sm shadow-sm"
+                            className="flex items-center px-4 py-3 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all font-bold text-sm shadow-sm"
                             title="JSONファイルからインポート"
                         >
                             <Upload className="w-4 h-4 mr-2" />
@@ -115,7 +114,7 @@ export default function InventoryPage() {
                         <button
                             onClick={exportItems}
                             disabled={items.length === 0}
-                            className="flex items-center px-4 py-3 bg-white text-zinc-600 border border-zinc-200 rounded-xl hover:bg-zinc-50 transition-all font-bold text-sm shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                            className="flex items-center px-4 py-3 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all font-bold text-sm shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
                             title="JSONファイルにエクスポート"
                         >
                             <Download className="w-4 h-4 mr-2" />
@@ -133,29 +132,29 @@ export default function InventoryPage() {
 
                 {/* Stats / Warnings */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm flex items-center gap-4">
+                    <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
                             <Package className="w-6 h-6" />
                         </div>
                         <div>
-                            <div className="text-2xl font-black text-zinc-900">{items.length}</div>
+                            <div className="text-2xl font-black text-zinc-900 dark:text-white">{items.length}</div>
                             <div className="text-xs text-zinc-500 font-bold uppercase">登録アイテム数</div>
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm flex items-center gap-4">
+                    <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-red-50 text-red-500 rounded-lg">
                             <AlertCircle className="w-6 h-6" />
                         </div>
                         <div>
-                            <div className="text-2xl font-black text-zinc-900">
+                            <div className="text-2xl font-black text-zinc-900 dark:text-white">
                                 {items.filter(i => i.quantity < 5).length}
                             </div>
                             <div className="text-xs text-zinc-500 font-bold uppercase">在庫僅少</div>
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm flex items-center gap-4">
+                    <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-zinc-100 text-zinc-500 rounded-lg">
                             <Save className="w-6 h-6" />
                         </div>
@@ -167,7 +166,7 @@ export default function InventoryPage() {
                 </div>
 
                 {/* Controls */}
-                <div className="bg-white p-4 rounded-xl shadow-sm border border-zinc-200 mb-6 flex flex-col md:flex-row gap-4">
+                <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 mb-6 flex flex-col md:flex-row gap-4">
                     <div className="relative flex-1">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
                         <input
@@ -175,13 +174,13 @@ export default function InventoryPage() {
                             placeholder="部品名、値、メモで検索..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg outline-none focus:border-blue-500 transition-colors"
+                            className="w-full pl-10 pr-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg outline-none focus:border-blue-500 transition-colors"
                         />
                     </div>
                     <select
                         value={categoryFilter}
                         onChange={(e) => setCategoryFilter(e.target.value as any)}
-                        className="px-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg outline-none focus:border-blue-500 text-sm font-bold text-zinc-700"
+                        className="px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg outline-none focus:border-blue-500 text-sm font-bold text-zinc-700 dark:text-zinc-300"
                     >
                         <option value="all">全てのカテゴリ</option>
                         {Object.entries(CATEGORY_LABELS).map(([key, label]) => (
@@ -191,19 +190,19 @@ export default function InventoryPage() {
                 </div>
 
                 {/* Inventory List */}
-                <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden min-h-[400px]">
+                <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-700 overflow-hidden min-h-[400px]">
                     {!isLoaded ? (
                         <div className="p-12 text-center text-zinc-400">読み込み中...</div>
                     ) : filteredItems.length === 0 ? (
                         <div className="p-12 text-center">
                             <Package className="w-16 h-16 text-zinc-200 mx-auto mb-4" />
-                            <h3 className="text-zinc-900 font-bold mb-2">アイテムが見つかりません</h3>
+                            <h3 className="text-zinc-900 dark:text-white font-bold mb-2">アイテムが見つかりません</h3>
                             <p className="text-zinc-500 text-sm">新しい部品を追加して管理を始めましょう。</p>
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
-                                <thead className="bg-zinc-50 border-b border-zinc-200">
+                                <thead className="bg-zinc-50 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700">
                                     <tr>
                                         <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">部品名 / 値</th>
                                         <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase">カテゴリ</th>
@@ -212,11 +211,11 @@ export default function InventoryPage() {
                                         <th className="px-6 py-4 text-xs font-bold text-zinc-400 font-mono uppercase text-right">操作</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-zinc-100">
+                                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
                                     {filteredItems.map(item => (
                                         <tr key={item.id} className="group hover:bg-blue-50/30 transition-colors">
                                             <td className="px-6 py-4">
-                                                <div className="font-bold text-zinc-900">{item.name}</div>
+                                                <div className="font-bold text-zinc-900 dark:text-white">{item.name}</div>
                                                 <div className="text-xs text-zinc-500 font-mono">{item.value}</div>
                                             </td>
                                             <td className="px-6 py-4">
@@ -230,8 +229,22 @@ export default function InventoryPage() {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 text-center">
-                                                <div className={`font-mono font-bold ${item.quantity < 5 ? 'text-red-500' : 'text-zinc-900'}`}>
-                                                    {item.quantity}
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <button
+                                                        onClick={() => updateItem(item.id, { quantity: Math.max(0, item.quantity - 1) })}
+                                                        className="w-7 h-7 flex items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:bg-red-100 hover:text-red-500 dark:hover:bg-red-900/30 transition-colors"
+                                                    >
+                                                        <Minus className="w-3 h-3" />
+                                                    </button>
+                                                    <div className={`font-mono font-bold min-w-[2rem] ${item.quantity < 5 ? 'text-red-500' : 'text-zinc-900 dark:text-white'}`}>
+                                                        {item.quantity}
+                                                    </div>
+                                                    <button
+                                                        onClick={() => updateItem(item.id, { quantity: item.quantity + 1 })}
+                                                        className="w-7 h-7 flex items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:bg-green-100 hover:text-green-600 dark:hover:bg-green-900/30 transition-colors"
+                                                    >
+                                                        <Plus className="w-3 h-3" />
+                                                    </button>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 text-right">
@@ -243,8 +256,8 @@ export default function InventoryPage() {
                                                         <Edit2 className="w-4 h-4" />
                                                     </button>
                                                     <button
-                                                        onClick={() => deleteItem(item.id)}
-                                                        className="p-2 text-zinc-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors"
+                                                        onClick={() => setDeleteTarget(item)}
+                                                        className="p-2 text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors"
                                                     >
                                                         <Trash2 className="w-4 h-4" />
                                                     </button>
@@ -262,9 +275,9 @@ export default function InventoryPage() {
                 {isModalOpen && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsModalOpen(false)}></div>
-                        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
-                            <div className="p-6 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/50">
-                                <h3 className="font-bold text-lg text-zinc-900">
+                        <div className="relative bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
+                            <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center bg-zinc-50/50 dark:bg-zinc-800/50">
+                                <h3 className="font-bold text-lg text-zinc-900 dark:text-white">
                                     {editingItem ? '部品を編集' : '部品を追加'}
                                 </h3>
                                 <button onClick={() => setIsModalOpen(false)} className="text-zinc-400 hover:text-zinc-600">
@@ -344,6 +357,39 @@ export default function InventoryPage() {
                                     {editingItem ? '更新する' : '追加する'}
                                 </button>
                             </form>
+                        </div>
+                    </div>
+                )}
+
+                {/* Delete Confirmation Modal */}
+                {deleteTarget && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setDeleteTarget(null)}></div>
+                        <div className="relative bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in duration-200 p-6 text-center">
+                            <div className="mx-auto w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mb-4">
+                                <Trash2 className="w-6 h-6 text-red-500" />
+                            </div>
+                            <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">削除の確認</h3>
+                            <p className="text-sm text-zinc-500 mb-6">
+                                <span className="font-bold text-zinc-700 dark:text-zinc-300">{deleteTarget.name}</span> を削除しますか？<br />この操作は取り消せません。
+                            </p>
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => setDeleteTarget(null)}
+                                    className="flex-1 px-4 py-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl font-bold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                                >
+                                    キャンセル
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        deleteItem(deleteTarget.id);
+                                        setDeleteTarget(null);
+                                    }}
+                                    className="flex-1 px-4 py-3 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition-colors shadow-lg shadow-red-200 dark:shadow-red-900/30"
+                                >
+                                    削除する
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
