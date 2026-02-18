@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Circuit-Pal (電子工作ツールキット)
 
-## Getting Started
+電子工作愛好家、メイカー、エンジニアのための、シンプルで実用的な計算＆リファレンスツール集です。
+直感的なモダンUIで、日々の「ちょっとした計算」をスムーズにします。
 
-First, run the development server:
+## 機能一覧 (Features)
+
+### 1. 抵抗値計算 (Resistor Color Code)
+*   **カラーコード読取**: 4本、5本、6本帯のカラーコードから抵抗値を算出。
+*   **逆引き検索**: 「4.7k」などの値から、対応するカラーコードを表示。
+*   **コピー機能**: 計算結果をワンクリックでクリップボードにコピー。
+
+### 2. オームの法則計算 (Ohm's Law)
+*   電圧(V)、電流(I)、抵抗(R)、電力(P)のうち2つを入力すると、残りを自動計算。
+*   矛盾する値が入力された場合のエラー検知機能付き。
+
+### 3. LED抵抗計算 (LED Series Resistor)
+*   電源電圧、LEDの順方向電圧(Vf)、電流(If)から、必要な直列抵抗値を計算。
+*   **E24系列**: 計算値に最も近い、市販されている標準的な抵抗値を提案。
+*   消費電力も同時に算出し、抵抗器の定格選定をサポート。
+
+### 4. ピン配置リファレンス (Pin-Pal)
+*   **Arduino Uno**: インタラクティブなピン配置図。
+*   **機能フィルタ**: PWM、I2C、SPIなどの機能別にピンをハイライト表示。
+*   マウスオーバーで詳細なピン機能を確認可能。
+
+### 5. バッテリー寿命計算 (Battery Life Estimator)
+*   バッテリー容量(mAh)と消費電流(mA)から、稼働時間を予測。
+*   **安全な見積もり**: 電圧降下や劣化を考慮した、実用的な「80%ルール」による算出。
+
+## 技術スタック
+*   **Framework**: Next.js 14+ (App Router)
+*   **Language**: TypeScript
+*   **Styling**: Tailwind CSS
+*   **Icons**: Lucide React
+*   **UI Components**: Radix UI (Tabs)
+
+## 開発環境のセットアップ
 
 ```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# -> http://localhost:3000 でアクセス
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ライセンス
+MIT License
