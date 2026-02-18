@@ -1,4 +1,5 @@
-// Web Serial API Type Definitions
+// Web Serial API 型定義（グローバル宣言）
+// 参照: https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API
 
 interface SerialPort {
     open(options: SerialOptions): Promise<void>;
@@ -11,16 +12,12 @@ interface SerialOptions {
     baudRate: number;
     dataBits?: number;
     stopBits?: number;
-    parity?: 'none' | 'even' | 'odd';
+    parity?: "none" | "even" | "odd";
     bufferSize?: number;
-    flowControl?: 'none' | 'hardware';
+    flowControl?: "none" | "hardware";
 }
 
-interface Navigator {
-    serial: Serial;
-}
-
-interface Serial {
+interface Serial extends EventTarget {
     requestPort(options?: SerialPortRequestOptions): Promise<SerialPort>;
     getPorts(): Promise<SerialPort[]>;
 }
@@ -34,4 +31,6 @@ interface SerialPortFilter {
     usbProductId?: number;
 }
 
-export { }; // Make this a module
+interface Navigator {
+    readonly serial: Serial;
+}

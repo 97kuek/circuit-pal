@@ -11,11 +11,11 @@ export default function LEDCalculatorTab() {
     const wattage = Math.pow(ledCurrent / 1000, 2) * resistance;
 
     const presets = [
-        { name: "Red", v: 2.0, i: 20, color: "bg-red-500" },
-        { name: "Green", v: 3.0, i: 20, color: "bg-green-500" },
-        { name: "Blue", v: 3.3, i: 20, color: "bg-blue-500" },
-        { name: "White", v: 3.3, i: 20, color: "bg-white border border-zinc-200" },
-        { name: "Yellow", v: 2.1, i: 20, color: "bg-yellow-400" },
+        { name: "赤", v: 2.0, i: 20, color: "bg-red-500" },
+        { name: "緑", v: 3.0, i: 20, color: "bg-green-500" },
+        { name: "青", v: 3.3, i: 20, color: "bg-blue-500" },
+        { name: "白", v: 3.3, i: 20, color: "bg-white border border-zinc-200" },
+        { name: "黄", v: 2.1, i: 20, color: "bg-yellow-400" },
     ];
 
     return (

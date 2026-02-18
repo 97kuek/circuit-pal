@@ -71,21 +71,21 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-blue-100">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 bg-grid-pattern font-sans text-zinc-900 dark:text-zinc-100 selection:bg-blue-100">
       <main className="max-w-6xl mx-auto p-6 md:p-12 space-y-16">
 
         {/* Header Section */}
         <div className="text-center space-y-6 pt-12">
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs font-mono text-zinc-500 mb-4">
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-4">
             <span className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
-            SYSTEM ONLINE // V2.0.0
+            システム稼働中 // V2.0.0
           </div>
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-zinc-900 leading-[0.9]">
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-zinc-900 dark:text-white leading-[0.9]">
             CIRCUIT<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">PAL.</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-500 max-w-xl mx-auto font-medium leading-relaxed">
-            The Ultimate Toolkit for Makers.<br />
-            <span className="text-zinc-400 text-sm font-mono mt-2 block">PRECISION TOOLS FOR ELECTRONICS</span>
+            メイカーのための究極のツールキット<br />
+            <span className="text-zinc-400 text-sm font-mono mt-2 block">精密な電子工作ツール</span>
           </p>
         </div>
 
@@ -95,10 +95,10 @@ export default function Home() {
             <Link
               key={tool.name}
               href={tool.href}
-              className="group relative flex flex-col p-6 bg-white rounded-2xl border border-zinc-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+              className="group relative flex flex-col p-6 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
             >
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <tool.icon className="w-24 h-24 text-zinc-900" />
+                <tool.icon className="w-24 h-24 text-zinc-900 dark:text-zinc-100" />
               </div>
 
               <div
@@ -108,7 +108,7 @@ export default function Home() {
               </div>
 
               <div className="relative z-10">
-                <h2 className="text-lg font-bold text-zinc-900 mb-1 group-hover:text-blue-600 transition-colors">
+                <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {tool.name}
                 </h2>
                 <p className="text-zinc-500 text-sm font-medium leading-relaxed">
@@ -117,16 +117,12 @@ export default function Home() {
               </div>
 
               <div className="mt-6 flex items-center text-xs font-mono font-bold text-zinc-400 group-hover:text-blue-600 transition-colors">
-                ACCESS TOOL <span className="ml-2">-&gt;</span>
+                ツールを開く <span className="ml-2">→</span>
               </div>
             </Link>
           ))}
         </div>
       </main>
-
-      <footer className="py-12 text-center text-zinc-400 font-mono text-xs border-t border-zinc-100 mt-20 bg-white/50 backdrop-blur-sm">
-        <p>ENGINEERED FOR MAKERS • 2026 CIRCUIT-PAL</p>
-      </footer>
     </div>
   );
 }

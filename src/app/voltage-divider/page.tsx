@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Activity, RefreshCw } from "lucide-react";
+import { ArrowLeft, Activity, RefreshCw, Copy, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { calculateVoltageDivider, calculateRequiredR2, findNearestE24 } from "@/lib/voltage-divider";
 import { formatResistance } from "@/lib/calculations";
@@ -16,6 +16,7 @@ export default function VoltageDividerPage() {
 
     const [result, setResult] = useState<number | null>(null);
     const [nearestR, setNearestR] = useState<number | null>(null);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const v_in = parseFloat(vin);
@@ -189,10 +190,28 @@ export default function VoltageDividerPage() {
                     {/* Results & Info Panel */}
                     <div className="space-y-6">
                         <div className="bg-white p-8 rounded-2xl shadow-xl shadow-zinc-200 border border-zinc-100">
-                            <h3 className="text-zinc-900 font-bold mb-4 flex items-center">
-                                <Activity className="w-5 h-5 mr-2 text-teal-500" />
-                                計算結果
-                            </h3>
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-zinc-900 dark:text-zinc-100 font-bold flex items-center">
+                                    <Activity className="w-5 h-5 mr-2 text-teal-500" />
+                                    計算結果
+                                </h3>
+                                <button
+                                    onClick={() => {
+                                        if (!result) return;
+                                        const text = mode === 'vout'
+                                            ? `Vout: ${result.toFixed(2)}V (Vin: ${vin}V, R1: ${r1}Ω, R2: ${r2}Ω)`
+                                            : `R2: ${formatResistance(result)}${nearestR ? ` (E24近似: ${formatResistance(nearestR)})` : ''}`;
+                                        navigator.clipboard.writeText(text);
+                                        setCopied(true);
+                                        setTimeout(() => setCopied(false), 2000);
+                                    }}
+                                    disabled={!result}
+                                    className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors disabled:opacity-30"
+                                    title="結果をコピー"
+                                >
+                                    {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                                </button>
+                            </div>
 
                             {mode === "vout" ? (
                                 <div>

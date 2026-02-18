@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Activity, RefreshCw, Zap, Clock } from "lucide-react";
+import { ArrowLeft, Activity, RefreshCw, Zap, Clock, Copy, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { calculateAstable, calculateMonostable, TimerCalculation } from "@/lib/555-timer";
 import { formatResistance, formatCapacitance } from "@/lib/calculations";
@@ -10,22 +10,19 @@ export default function Timer555Page() {
     const [mode, setMode] = useState<"astable" | "monostable">("astable");
 
     // Astable Inputs
-    const [r1, setR1] = useState("1000"); // 1k
-    const [r2, setR2] = useState("10000"); // 10k
-    const [c, setC] = useState("0.00001"); // 10uF in Farads for raw input, let's use easier units for UI if possible, but keep simple for now
+    const [r1, setR1] = useState("1000");
+    const [r2, setR2] = useState("10000");
+    const [c, setC] = useState("0.00001");
 
     // Monostable Inputs
     const [monoR, setMonoR] = useState("10000");
     const [monoC, setMonoC] = useState("0.0001");
 
     const [result, setResult] = useState<TimerCalculation | null>(null);
+    const [copied, setCopied] = useState(false);
 
-    // Helpers to handle SI unit entry might be nice, but let's stick to base units with formatting for now or simple multipliers
-    // To make it user friendly, let's assume inputs are Ohms and Microfarads for C? 
-    // Actually, usually users enter standard units. Let's provide dropdowns or just use base units with clear labels.
-    // Let's use: R in Ohms, C in uF (microfarads) for better UX.
 
-    const [cUnit, setCUnit] = useState(0.000001); // Multiplier for uF
+    const [cUnit, setCUnit] = useState(0.000001); // µF
 
     useEffect(() => {
         if (mode === "astable") {
@@ -200,7 +197,34 @@ export default function Timer555Page() {
                                     style={{ animationDuration: `${1 / result.frequency}s` }}></div>
                             )}
 
-                            <h2 className="text-zinc-500 font-bold text-xs uppercase tracking-widest mb-6 border-b border-zinc-800 pb-2">計算結果</h2>
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-zinc-500 font-bold text-xs uppercase tracking-widest border-b border-zinc-800 pb-2 mb-6">計算結果</h2>
+                                <button
+                                    onClick={() => {
+                                        if (!result) return;
+                                        let text = '';
+                                        if (mode === 'astable') {
+                                            text = [
+                                                `周波数: ${result.frequency?.toFixed(3)} Hz`,
+                                                `デューティ比: ${result.dutyCycle?.toFixed(1)}%`,
+                                                `周期: ${result.period ? (result.period * 1000).toFixed(2) : '--'} ms`,
+                                                `High時間: ${result.highTime ? (result.highTime * 1000).toFixed(2) : '--'} ms`,
+                                                `Low時間: ${result.lowTime ? (result.lowTime * 1000).toFixed(2) : '--'} ms`,
+                                            ].join('\n');
+                                        } else {
+                                            text = `パルス幅: ${result.highTime ? (result.highTime >= 1 ? result.highTime.toFixed(3) + ' s' : (result.highTime * 1000).toFixed(2) + ' ms') : '--'}`;
+                                        }
+                                        navigator.clipboard.writeText(text);
+                                        setCopied(true);
+                                        setTimeout(() => setCopied(false), 2000);
+                                    }}
+                                    disabled={!result}
+                                    className="text-zinc-500 hover:text-white transition-colors disabled:opacity-30 mb-4"
+                                    title="結果をコピー"
+                                >
+                                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                                </button>
+                            </div>
 
                             {mode === "astable" ? (
                                 <div className="space-y-8">

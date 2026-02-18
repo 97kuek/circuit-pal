@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Box } from "lucide-react";
+import { ArrowLeft, Box, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { decodeCapacitorCode, CapacitorResult } from "@/lib/capacitor";
 
 export default function CapacitorPage() {
     const [code, setCode] = useState("104");
     const [result, setResult] = useState<CapacitorResult | null>(decodeCapacitorCode("104"));
+    const [copied, setCopied] = useState(false);
 
     const handleInput = (val: string) => {
         // Only allow numbers, max 3 chars
@@ -96,9 +97,24 @@ export default function CapacitorPage() {
                             <p className="text-xs font-bold text-zinc-400 font-mono uppercase tracking-wider mb-2">計算結果</p>
                             <div className="bg-zinc-900 text-white p-6 rounded-2xl shadow-xl shadow-indigo-500/20 relative overflow-hidden group">
                                 <div className="absolute inset-0 bg-indigo-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                                <h2 className="text-3xl md:text-4xl font-mono font-bold text-white">
-                                    {result?.fullString || "---"}
-                                </h2>
+                                <div className="flex items-center justify-center gap-3">
+                                    <h2 className="text-3xl md:text-4xl font-mono font-bold text-white">
+                                        {result?.fullString || "---"}
+                                    </h2>
+                                    <button
+                                        onClick={() => {
+                                            if (!result) return;
+                                            navigator.clipboard.writeText(result.fullString);
+                                            setCopied(true);
+                                            setTimeout(() => setCopied(false), 2000);
+                                        }}
+                                        disabled={!result}
+                                        className="text-zinc-500 hover:text-white transition-colors disabled:opacity-30"
+                                        title="結果をコピー"
+                                    >
+                                        {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

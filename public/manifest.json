@@ -1,10 +1,10 @@
 {
     "name": "Circuit-Pal",
-    "short_name": "Circuit-Pal",
-    "description": "Essential Electronics Engineering Toolkit",
+    "short_name": "CircuitPal",
+    "description": "メイカー＆エンジニアのための電子工作ツールキット",
     "start_url": "/",
     "display": "standalone",
-    "background_color":="#fafafa",
+    "background_color": "#fafafa",
     "theme_color": "#ffffff",
     "icons": [
         {

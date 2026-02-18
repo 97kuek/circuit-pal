@@ -50,7 +50,7 @@ export default function ResistorColorTab() {
     const ColorButton = ({ color, selected, onClick }: { color: any, selected: boolean, onClick: () => void }) => (
         <button
             onClick={onClick}
-            className={`w-full h-8rounded flex items-center justify-center text-[10px] font-bold uppercase transition-transform active:scale-95 ${selected ? 'ring-2 ring-offset-2 ring-zinc-400 z-10 scale-105 rounded-md shadow-sm' : 'rounded-sm opacity-80 hover:opacity-100'}`}
+            className={`w-full h-8 rounded flex items-center justify-center text-[10px] font-bold uppercase transition-transform active:scale-95 ${selected ? 'ring-2 ring-offset-2 ring-zinc-400 z-10 scale-105 rounded-md shadow-sm' : 'rounded-sm opacity-80 hover:opacity-100'}`}
             style={{ backgroundColor: color.hex, color: ['white', 'silver', 'yellow'].includes(color.name) ? 'black' : 'white' }}
         >
             {selected && "•"}

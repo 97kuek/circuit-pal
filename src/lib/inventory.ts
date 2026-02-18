@@ -58,7 +58,49 @@ export function useInventory() {
         setItems(prev => prev.filter(item => item.id !== id));
     };
 
-    return { items, addItem, updateItem, deleteItem, isLoaded };
+    const exportItems = () => {
+        const data = JSON.stringify(items, null, 2);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `circuit-pal-inventory-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    const importItems = (file: File): Promise<number> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target?.result as string);
+                    if (!Array.isArray(data)) {
+                        reject(new Error('無効なファイル形式です'));
+                        return;
+                    }
+                    const validItems: InventoryItem[] = data.filter(
+                        (item: any) => item.name && item.category && typeof item.quantity === 'number'
+                    ).map((item: any) => ({
+                        ...item,
+                        id: item.id || crypto.randomUUID(),
+                        lastUpdated: item.lastUpdated || Date.now(),
+                    }));
+                    setItems(prev => [...validItems, ...prev]);
+                    resolve(validItems.length);
+                } catch {
+                    reject(new Error('JSONの解析に失敗しました'));
+                }
+            };
+            reader.readAsText(file);
+        });
+    };
+
+    const clearAll = () => {
+        setItems([]);
+    };
+
+    return { items, addItem, updateItem, deleteItem, exportItems, importItems, clearAll, isLoaded };
 }
 
 export const CATEGORY_LABELS: Record<InventoryCategory, string> = {

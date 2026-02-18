@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, RefreshCw, Trash2, Zap } from "lucide-react";
+import { ArrowLeft, RefreshCw, Trash2, Zap, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { calculateOhmsLaw } from "@/lib/calculations";
 
@@ -64,6 +64,20 @@ export default function OhmsLawPage() {
         setError(null);
     };
 
+    const [copied, setCopied] = useState(false);
+    const handleCopy = () => {
+        const lines = [
+            values.v && `電圧: ${values.v} V`,
+            values.i && `電流: ${values.i} A`,
+            values.r && `抵抗: ${values.r} Ω`,
+            values.p && `電力: ${values.p} W`,
+        ].filter(Boolean).join('\n');
+        if (!lines) return;
+        navigator.clipboard.writeText(lines);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     const handleChange = (key: keyof typeof values, val: string) => {
         setValues(prev => ({ ...prev, [key]: val }));
     };
@@ -87,13 +101,23 @@ export default function OhmsLawPage() {
                             </h1>
                         </div>
                     </div>
-                    <button
-                        onClick={handleClear}
-                        className="flex items-center px-4 py-2 text-sm text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
-                    >
-                        <Trash2 className="w-4 h-4 mr-2" />
-                        クリア
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={handleCopy}
+                            disabled={!values.v && !values.i && !values.r && !values.p}
+                            className="flex items-center px-4 py-2 text-sm text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                            {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                            {copied ? 'コピー済み' : '結果をコピー'}
+                        </button>
+                        <button
+                            onClick={handleClear}
+                            className="flex items-center px-4 py-2 text-sm text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
+                        >
+                            <Trash2 className="w-4 h-4 mr-2" />
+                            クリア
+                        </button>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 rounded-2xl shadow-xl shadow-zinc-200/50 border border-zinc-100">

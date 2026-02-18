@@ -35,8 +35,8 @@ export function useSerial() {
             const textEncoder = new TextEncoderStream();
             const textDecoder = new TextDecoderStream();
 
-            const readableStreamClosed = selectedPort.readable!.pipeTo(textDecoder.writable);
-            const writableStreamClosed = textEncoder.readable.pipeTo(selectedPort.writable!);
+            const readableStreamClosed = (selectedPort.readable as ReadableStream).pipeTo(textDecoder.writable);
+            const writableStreamClosed = textEncoder.readable.pipeTo(selectedPort.writable as WritableStream);
 
             const reader = textDecoder.readable.getReader();
             const writer = textEncoder.writable.getWriter();

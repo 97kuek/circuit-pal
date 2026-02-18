@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Ruler, Zap, Layers, Thermometer } from "lucide-react";
+import { ArrowLeft, Ruler, Zap, Layers, Thermometer, Copy, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { calculateTraceWidth, TraceCalculation } from "@/lib/trace-width";
 
@@ -11,6 +11,7 @@ export default function TraceWidthPage() {
     const [tempRise, setTempRise] = useState(10);
     const [layer, setLayer] = useState<'external' | 'internal'>('external');
     const [result, setResult] = useState<TraceCalculation | null>(null);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const res = calculateTraceWidth(current, tempRise, thickness, layer === 'internal');
@@ -126,7 +127,23 @@ export default function TraceWidthPage() {
                             ></div>
 
                             <div className="relative z-10">
-                                <div className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-2">推奨パターン幅</div>
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="text-zinc-500 text-xs font-bold uppercase tracking-widest">推奨パターン幅</div>
+                                    <button
+                                        onClick={() => {
+                                            if (!result) return;
+                                            const text = `パターン幅: ${result.widthInMm.toFixed(2)}mm (${result.widthInMils.toFixed(2)} mil)\n電流: ${current}A, 銅厚: ${thickness}oz, 温度上昇: ${tempRise}°C`;
+                                            navigator.clipboard.writeText(text);
+                                            setCopied(true);
+                                            setTimeout(() => setCopied(false), 2000);
+                                        }}
+                                        disabled={!result}
+                                        className="text-zinc-500 hover:text-white transition-colors disabled:opacity-30"
+                                        title="結果をコピー"
+                                    >
+                                        {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                                    </button>
+                                </div>
                                 <div className="text-6xl font-black font-mono mb-2">
                                     {result ? result.widthInMm.toFixed(2) : "--"}<span className="text-2xl text-zinc-500">mm</span>
                                 </div>

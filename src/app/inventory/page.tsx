@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Archive, Plus, Search, Trash2, Edit2, Package, Save, X, AlertCircle } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Archive, Plus, Search, Trash2, Edit2, Package, Save, X, AlertCircle, Download, Upload } from "lucide-react";
+import { useState, useRef } from "react";
 import { useInventory, InventoryItem, InventoryCategory, CATEGORY_LABELS } from "@/lib/inventory";
 
 export default function InventoryPage() {
-    const { items, addItem, updateItem, deleteItem, isLoaded } = useInventory();
+    const { items, addItem, updateItem, deleteItem, exportItems, importItems, isLoaded } = useInventory();
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingItem, setEditingItem] = useState<InventoryItem | null>(null);
@@ -80,17 +81,54 @@ export default function InventoryPage() {
                             <h1 className="text-3xl font-black tracking-tight text-zinc-900">
                                 部品在庫管理 <span className="text-zinc-400 font-mono text-xl font-normal">INVENTORY</span>
                             </h1>
-                            <p className="text-xs text-zinc-400 font-mono mt-1">LOCAL STORAGE • PRIVATE • SECURE</p>
+                            <p className="text-xs text-zinc-400 font-mono mt-1">ローカル保存 • 非公開 • 安全</p>
                         </div>
                     </div>
 
-                    <button
-                        onClick={() => handleOpenModal()}
-                        className="flex items-center justify-center px-6 py-3 bg-zinc-900 text-white rounded-xl hover:bg-zinc-800 transition-all font-bold shadow-lg hover:shadow-xl active:scale-95"
-                    >
-                        <Plus className="w-5 h-5 mr-2" />
-                        部品を追加
-                    </button>
+                    <div className="flex items-center gap-3">
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            accept=".json"
+                            className="hidden"
+                            onChange={async (e) => {
+                                const file = e.target.files?.[0];
+                                if (file) {
+                                    try {
+                                        const count = await importItems(file);
+                                        alert(`${count}件のアイテムをインポートしました`);
+                                    } catch (err: any) {
+                                        alert(err.message || 'インポートに失敗しました');
+                                    }
+                                    e.target.value = '';
+                                }
+                            }}
+                        />
+                        <button
+                            onClick={() => fileInputRef.current?.click()}
+                            className="flex items-center px-4 py-3 bg-white text-zinc-600 border border-zinc-200 rounded-xl hover:bg-zinc-50 transition-all font-bold text-sm shadow-sm"
+                            title="JSONファイルからインポート"
+                        >
+                            <Upload className="w-4 h-4 mr-2" />
+                            インポート
+                        </button>
+                        <button
+                            onClick={exportItems}
+                            disabled={items.length === 0}
+                            className="flex items-center px-4 py-3 bg-white text-zinc-600 border border-zinc-200 rounded-xl hover:bg-zinc-50 transition-all font-bold text-sm shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                            title="JSONファイルにエクスポート"
+                        >
+                            <Download className="w-4 h-4 mr-2" />
+                            エクスポート
+                        </button>
+                        <button
+                            onClick={() => handleOpenModal()}
+                            className="flex items-center justify-center px-6 py-3 bg-zinc-900 text-white rounded-xl hover:bg-zinc-800 transition-all font-bold shadow-lg hover:shadow-xl active:scale-95"
+                        >
+                            <Plus className="w-5 h-5 mr-2" />
+                            部品を追加
+                        </button>
+                    </div>
                 </div>
 
                 {/* Stats / Warnings */}

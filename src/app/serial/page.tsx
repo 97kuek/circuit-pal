@@ -7,27 +7,14 @@ import { useSerial } from "@/lib/serial";
 
 export default function SerialPage() {
     const { isSupported, isConnected, connect, disconnect, send, messages, clearMessages, baudRate, setBaud } = useSerial();
-    const [inputValue, setInputValue] = useState("");
+    const [input, setInput] = useState("");
     const endOfLogRef = useRef<HTMLDivElement>(null);
 
-    // Auto-scroll to bottom
     useEffect(() => {
         endOfLogRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
-    const handleSend = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!inputValue) return;
-        send(inputValue);
-        setInputValue("");
-    };
 
-    // Group messages intelligently (naive implementation for now, just render chunks)
-    // A better terminal would aggregate partial lines.
-    // We'll render raw chunks but try to respect newlines.
-
-    // New state for the localized version
-    const [input, setInput] = useState("");
     const [history, setHistory] = useState<Array<{ type: 'received' | 'sent' | 'error', data: string, timestamp: Date }>>([]);
     const [autoScroll, setAutoScroll] = useState(true);
     const terminalRef = useRef<HTMLDivElement>(null);

@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Zap, Layers, Calculator, Lightbulb } from "lucide-react";
+import { ArrowLeft, Zap, Layers, Calculator, Lightbulb, ArrowRightLeft } from "lucide-react";
 import { useState } from "react";
 import ResistorColorTab from "./ResistorColorTab";
 import SMDDecoderTab from "./SMDDecoderTab";
 import LEDCalculatorTab from "./LEDCalculatorTab";
+import ReverseResistorTab from "./ReverseResistorTab";
 
 export default function ResistorsPage() {
-    const [activeTab, setActiveTab] = useState<'color' | 'smd' | 'led'>('color');
+    const [activeTab, setActiveTab] = useState<'color' | 'reverse' | 'smd' | 'led'>('color');
 
     return (
         <div className="min-h-screen bg-zinc-50 bg-grid-pattern font-sans text-zinc-900 selection:bg-purple-100">
@@ -45,6 +46,15 @@ export default function ResistorsPage() {
                         <Layers className="w-4 h-4" /> カラーコード
                     </button>
                     <button
+                        onClick={() => setActiveTab('reverse')}
+                        className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold whitespace-nowrap transition-all ${activeTab === 'reverse'
+                            ? "bg-zinc-900 text-white shadow-md"
+                            : "text-zinc-500 hover:bg-zinc-50"
+                            }`}
+                    >
+                        <ArrowRightLeft className="w-4 h-4" /> 逆引き
+                    </button>
+                    <button
                         onClick={() => setActiveTab('smd')}
                         className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold whitespace-nowrap transition-all ${activeTab === 'smd'
                             ? "bg-zinc-900 text-white shadow-md"
@@ -67,6 +77,7 @@ export default function ResistorsPage() {
                 {/* Tab Content */}
                 <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
                     {activeTab === 'color' && <ResistorColorTab />}
+                    {activeTab === 'reverse' && <ReverseResistorTab />}
                     {activeTab === 'smd' && <SMDDecoderTab />}
                     {activeTab === 'led' && <LEDCalculatorTab />}
                 </div>
